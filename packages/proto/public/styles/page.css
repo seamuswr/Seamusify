@@ -1,0 +1,144 @@
+body {
+    background-color: var(--color-background-body);
+    color: var(--color-text-body);
+    font-family: var(--font-family-body);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 150px 1fr 1fr 1fr ;
+    grid-template-rows: [start] 150px [line2] 100px [line3] 60px [line4] 50px [line5] 150px [end] auto;
+}
+
+header {
+    display: contents;
+}
+
+.main-header {
+    grid-row: 1 / 2;
+    justify-self: center;
+    grid-column: 2 / 7;
+    font-family: var(--font-family-header);
+    font-size: var(--font-size-xlarge);
+    color: var(--color-text-header);
+    background-color: var(--color-background-header);
+    border-style: solid;
+    border-radius: var(--border-radius-header);
+    text-align: center;
+    width: max-content;
+    padding: 10px;
+    margin: auto;
+}
+
+.login {
+    grid-row: 1 / 2;
+    justify-self: center;
+    grid-column: 6 / 8;
+    font-size: var(--font-size-medium);
+    color: var(--color-text-body);
+    background-color: var(--color-background-button);
+    font-family: var(--font-family-body);
+    border-style: solid;
+    border-radius: var(--border-radius-header);
+    text-align: center;
+    width: max-content;
+    padding: 8px;
+    margin: auto;
+}
+
+main {
+    display: contents;
+    color: var(--color-text-body);
+}
+
+
+.play_song {
+    color: var(--color-text-body);
+    grid-row: line2;
+    grid-column: 4 / 5;
+    font-size: var(--font-size-medium);
+    background-color: var(--color-background-button);
+    border-style: solid;
+    border-radius: var(--border-radius-header);
+    text-align: center;
+    width: max-content;
+    padding: 8px;
+    margin: auto;
+}
+
+.favorites {
+    display: contents;
+}
+
+.checkout {
+    grid-row: line3;
+    grid-column: 3 / 6;
+    justify-self: center;
+    align-self: center;
+}
+
+.songs {
+    color: var(--color-text-body);
+    grid-row: line4;
+    grid-column: 3;
+    justify-self: right;
+    text-decoration: underline;
+}
+
+.artists {
+    color: var(--color-text-body);
+    grid-row: line4;
+    grid-column: 4;
+    justify-self: center;
+    text-decoration: underline;
+}
+
+.genres {
+    color: var(--color-text-body);
+    grid-row: line4;
+    grid-column: 5;
+    justify-self: left;
+    text-decoration: underline;
+}
+
+.about {
+    color: var(--color-text-body);
+    grid-row: 6;
+    grid-column: 4 / 5;
+    justify-self: center;
+    text-decoration: underline;
+}
+
+.sub-header {
+    grid-row: line2;
+    grid-column: 3 / 6;
+    justify-self: center;
+    align-self: center;
+}
+
+#login {
+    color: var(--color-text-body);
+    text-decoration: underline;
+    font-size: var(--font-size-medium);
+}
+
+
+.party-mode {
+    grid-row: 7;
+    grid-column: 4 / 5;
+    justify-self: center;
+}
+
+.fav-list {
+    font-style: normal;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

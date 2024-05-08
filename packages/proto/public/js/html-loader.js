@@ -1,4 +1,19 @@
-function loadHTML(href, container) {
+export class HtmlFragmentElement extends HTMLElement {
+  connectedCallBack() {
+    const href = this.getAttribute("href");
+    const open = this.hasAttribute("open");
+
+    if (open) loadHTML(href, this);
+
+    this.addEventListener("html-fragment:open", () =>
+      loadHTML(href, this)
+    );
+  }
+}
+
+customElements.define("html-fragment", HtmlFragmentElement);
+
+export function loadHTML(href, container) {
   container.replaceChildren();
   fetch(href)
     .then((response) => {
@@ -20,7 +35,7 @@ function loadHTML(href, container) {
 
 const parser = new DOMParser();
 
-function addFragment(htmlString, container) {
+export function addFragment(htmlString, container) {
   const doc = parser.parseFromString(htmlString, "text/html");
   const fragment = Array.from(doc.body.childNodes);
 

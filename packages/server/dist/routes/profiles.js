@@ -34,7 +34,7 @@ module.exports = __toCommonJS(profiles_exports);
 var import_express = __toESM(require("express"));
 var import_profile_svc = __toESM(require("../services/profile-svc"));
 const router = import_express.default.Router();
-router.get("/:userid", (req, res) => {
+router.get("/:id", (req, res) => {
   const { userid } = req.params;
   import_profile_svc.default.get(userid).then((profile) => res.json(profile)).catch((err) => res.status(404).end());
 });

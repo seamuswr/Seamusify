@@ -31,58 +31,13 @@
     </script>
 </head>
 
-<body class="page">
-    <header> 
-
-        <a class="main-header", href="index.html"> Seamus's Music Mixer</a>
-        <a class="login", href="spotifyLogin.html">
-                Spotify Login
+<body>
+    <json-object src="/api/profiles/blaze">
+        <a href="#" onclick="relayEvent(event, 'json-object:open')">
+          Blaze Pasquale
         </a>
-    </header>
-
-    <main>
-
-    <label class="party-mode", onchange="relayEvent(
-            event, 
-            'party-mode', 
-            {checked: event.target.checked})">
-            <input type="checkbox" autocomplete="off" /> Party mode
-    </label>
-
-    <a class="play_song", href="playSong.html">
-        Play a song
-    </a>
-
-    <ul class="favorites">
-        <h3 class="checkout"> 
-            Check out your top:
-        </h3>
-
-        <a class="songs", onclick="loadHTML(
-            'songs.html',
-            event.target.closest('a'))"
-            >
-            Songs
-        </a>
-
-        <a class="artists", onclick="loadHTML(
-            'artists.html',
-            event.target.closest('a'))">
-            Artists
-        </a>
-        <a class="genres", onclick="loadHTML(
-            'topGenres.html',
-            event.target.closest('a'))">
-            Genres
-        </a>
-    </ul>
-
-    <a class="about", href="about.html">
-        About
-    </a>
-
-    </main>
-
+      </json-object>
 
 </body>
+
 </html>

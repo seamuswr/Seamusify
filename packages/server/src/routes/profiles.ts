@@ -6,7 +6,7 @@ import { Profile } from "../models/profile";
 const router = express.Router();
 
 // in src/routes/profiles.ts
-router.get("/:userid", (req: Request, res: Response) => {
+router.get("/:id", (req: Request, res: Response) => {
     const { userid } = req.params;
   
     profiles

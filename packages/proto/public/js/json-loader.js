@@ -1,5 +1,6 @@
 import { addFragment } from "./html-loader.js";
 import { prepareTemplate } from "./template.js";
+import { Observer } from "@calpoly/mustang"
 
 export class JsonObjectElement extends HTMLElement {
   static template = prepareTemplate(`<template>
@@ -36,35 +37,55 @@ export class JsonObjectElement extends HTMLElement {
     const src = this.getAttribute("src");
     const open = this.hasAttribute("open");
 
-    if (open) loadJSON(src, this, renderAssignments);
+    this._authObserver.observe(({user}) => {
+      console.log("Setting user as effect of change", user);
+      this._user = user;
+      if (this.src){
+        if (open)
+          loadJSON(src, this, renderAssignments, this.authorization)
+      }
+    })
 
     this.addEventListener("json-object:open", () =>
-      loadJSON(src, this, renderAssignments)
+      loadJSON(src, this, renderAssignments, this.authorization)
+    );
+  }
+
+  _authObserver = new Observer(this, "blazing:auth");
+
+  get authorization() {
+    console.log("Authorization for user, ", this._user);
+    return (
+      this._user?.authenticated && {
+        Authorization: `Bearer ${this._user.token}`
+      }
     );
   }
 }
 
 customElements.define("json-object", JsonObjectElement);
 
-export function loadJSON(src, container, render) {
+export function loadJSON(
+  src,
+  container,
+  render,
+  authorization
+) {
   container.replaceChildren();
-  fetch(src)
+  return fetch(src, {
+    headers: authorization || undefined
+  })
     .then((response) => {
       if (response.status !== 200) {
-        throw `Status: ${response.status}`;
+        throw {
+          status: response.status,
+          url: src,
+          headers: authorization
+        };
       }
       return response.json();
     })
-    .then((json) => addFragment(render(json), container))
-    .catch((error) =>
-      addFragment(
-        render({
-          Error: error,
-          "While Loading": src
-        }),
-        container
-      )
-    );
+    .then((json) => addFragment(render(json), container));
 }
 
 function renderAssignments(json) {

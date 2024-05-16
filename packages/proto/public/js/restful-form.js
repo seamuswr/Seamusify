@@ -1,4 +1,5 @@
 import { prepareTemplate } from "./template.js";
+import { Observer } from "@calpoly/mustang";
 
 export class RestfulFormElement extends HTMLElement {
   static observedAttributes = ["src", "new"];
@@ -58,7 +59,7 @@ export class RestfulFormElement extends HTMLElement {
         ? this.src.replace(/[/][$]new$/, "")
         : this.src;
 
-      submitForm(src, this._state, method)
+      submitForm(src, this._state, method, this.authorization)
         .then((json) => populateForm(json, this))
         .then((json) => {
           const customType = `restful-form:${action}`;
@@ -66,6 +67,7 @@ export class RestfulFormElement extends HTMLElement {
             bubbles: true,
             composed: true,
             detail: {
+              method,
               [action]: json,
               url: src
             }
@@ -83,39 +85,54 @@ export class RestfulFormElement extends HTMLElement {
     });
   }
 
+  _authObserver = new Observer(this, "blazing:auth");
+
+  get authorization() {
+    console.log("Restful-from authorization for user, ", this._user);
+    return (
+      this._user?.authenticated && {
+        Authorization: `Bearer ${this._user.token}`
+      }
+    );
+  }
+
   connectedCallback() {
     console.log(`ConnectedCallback: src=`, this.src);
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
-    console.log(
-      `restful-form: Attribute ${name} changed from ${oldValue} to`,
-      newValue
-    );
+    this._authObserver.observe(({ user }) => {
+      this._user = user;
+  
     switch (name) {
       case "src":
         if (newValue && newValue !== oldValue && !this.isNew) {
-          fetchData(this.src).then((json) => {
-            this._state = json;
-            populateForm(json, this);
-          });
+          fetchData(this.src, this.authorization).then(
+            (json) => {
+              this._state = json;
+              populateForm(json, this);
+            }
+          );
         }
         break;
       case "new":
         if (newValue) {
-          console.log("Blanking state for new form");
           this._state = {};
           populateForm({}, this);
         }
         break;
     }
+  });
   }
 }
 
 customElements.define("restful-form", RestfulFormElement);
 
-export function fetchData(src) {
-  return fetch(src)
+function fetchData(src, authorization) {
+  return fetch(src, { headers: {
+    "Content-Type": "application/json",
+    ...authorization
+  } })
     .then((response) => {
       if (response.status !== 200) {
         throw `Status: ${response.status}`;
@@ -149,10 +166,18 @@ function populateForm(json, formBody) {
   return json;
 }
 
-function submitForm(src, json, method = "PUT") {
+function submitForm(
+  src,
+  json,
+  method = "PUT",
+  authorization = {}
+) {
   return fetch(src, {
     method,
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      ...authorization
+    },
     body: JSON.stringify(json)
   })
     .then((res) => {
@@ -162,3 +187,4 @@ function submitForm(src, json, method = "PUT") {
     })
     .catch((err) => console.log("Error submitting form:", err));
 }
+

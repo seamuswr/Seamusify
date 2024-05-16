@@ -48,6 +48,10 @@ main {
     color: var(--color-text-body);
 }
 
+profile-view {
+    grid-row: 2
+
+}
 
 .play_song {
     color: var(--color-text-body);

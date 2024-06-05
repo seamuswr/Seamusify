@@ -8,12 +8,14 @@
     }
   },
   "scripts": {
-    "dev": "cross-env STATIC=../proto/public npx nodemon",
+    "dev": "nodemon",
     "build": "npx etsc",
-    "start": "node dist/index.js",
+    "start": "npm run build && npm run start:node",
+    "start:api": "cross-env STATIC=./public npm run start",
     "start:app": "cross-env STATIC=../app/dist npm run start",
+    "start:node": "node dist/index.js",
     "start:proto": "cross-env STATIC=../proto/public npm run start",
-    "check": "npx tsc --noEmit"
+    "check": "tsc --noEmit"
   },
   "author": "",
   "license": "ISC",

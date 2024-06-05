@@ -1,7 +1,6 @@
 import { Auth, Update } from "@calpoly/mustang";
 import { Msg } from "./messages";
 import { Model } from "./model";
-// @ts-ignore
 import { Profile } from "server/models";
 
 export default function update(
@@ -59,7 +58,9 @@ function saveProfile(
     msg: { userid: string },
     user: Auth.User
   ) {
+    console.log(msg.userid);
     return fetch(`/api/profiles/${msg.userid}`, {
+      method: "GET",
       headers: Auth.headers(user)
     })
       .then((response: Response) => {

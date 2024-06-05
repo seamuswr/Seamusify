@@ -1,5 +1,5 @@
 export interface Profile {
-    id: string;
+    userid: string;
     name: string;
     spotifyUsername: string;
     color: string;

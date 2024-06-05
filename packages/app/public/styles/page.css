@@ -1,5 +1,10 @@
-.page {
+body {
     background-color: var(--color-background-body);
+
+}
+
+
+.page {
     color: var(--color-text-body);
     font-family: var(--font-family-body);
     display: grid;
@@ -7,7 +12,7 @@
     grid-template-rows: [start] 150px [line2] 100px [line3] 60px [line4] 50px [line5] 150px [end] auto;
 }
 
-.music-header {
+.musical-header {
     display: contents;
 }
 header {
@@ -47,7 +52,6 @@ header {
 }
 
 main {
-    display: contents;
     color: var(--color-text-body);
 }
 
@@ -128,13 +132,18 @@ profile-view {
 
 
 .party-mode {
-    grid-row: 7;
-    grid-column: 4 / 5;
-    justify-self: center;
+    grid-row: 1;
+    grid-column: 2 / 3;
+    justify-self: end;
+    align-self: end;
 }
 
 .fav-list {
     font-style: normal;
+}
+
+a {
+    color: var(--color-text-body);
 }
 
 

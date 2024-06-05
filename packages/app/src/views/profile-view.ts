@@ -1,7 +1,6 @@
 import {  View } from "@calpoly/mustang";
 import { css, html } from "lit";
 import { property } from "lit/decorators.js";
-// @ts-ignore
 import { Profile } from "server/models";
 import resetStyles from "../css/reset";
 import { Msg } from "../messages";

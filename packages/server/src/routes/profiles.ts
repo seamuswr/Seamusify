@@ -6,9 +6,8 @@ import { Profile } from "../models/profile";
 const router = express.Router();
 
 // in src/routes/profiles.ts
-router.get("/:id", (req: Request, res: Response) => {
+router.get("/:userid", (req: Request, res: Response) => {
     const { userid } = req.params;
-  
     profiles
       .get(userid)
       .then((profile: Profile) => res.json(profile))
@@ -31,7 +30,7 @@ router.get("/", (req: Request, res: Response) => {
       .catch((err) => res.status(500).send(err));
   });
   
-router.put("/:id", (req: Request, res: Response) => {
+router.put("/:userid", (req: Request, res: Response) => {
     const { userid } = req.params;
     const newProfile = req.body;
   

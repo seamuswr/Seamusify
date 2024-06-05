@@ -1,4 +1,3 @@
-// @ts-ignore
 import { Profile } from "server/models";
 
 export interface Model {

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com" />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,200;0,400;0,700;1,700&family=Merriweather:wght@400;700&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="/styles/reset.css" />
+    <link rel="stylesheet" href="/styles/tokens.css" />
+    <link rel="stylesheet" href="public/styles/page.css" />
+    <script type="module">
+      import { define, Auth } from "@calpoly/mustang";
+      import { SignupFormElement } from "/src/components/signup-form";
+
+      define({
+        "mu-auth": Auth.Provider,
+        "signup-form": SignupFormElement
+      });
+    </script>
+    <style>
+      
+      main {
+        display: contents;
+      }
+
+      .page {
+        height: 100vh;
+      }
+      .card {
+        align-self: center;
+        grid-row: 2;
+        grid-column: 3 / span 4;
+      }
+      h2 {
+        grid-row: 1;
+        grid-column: 4;
+        align-self: end;
+      }
+      p {
+        grid-row: 3;
+        grid-column: 2 / -2;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body class="page">
+    <mu-auth>
+      <h2>Register</h2>
+      <main>
+        <signup-form class="card">
+          <label>
+            <span>Username:</span>
+            <input name="username" autocomplete="off" />
+          </label>
+          <label>
+            <span>Password:</span>
+            <input type="password" name="password" />
+          </label>
+        </signup-form>
+      </main>
+      <p>
+        Already have an account?
+        <a href="./login.html">Log In</a>
+      </p>
+    </mu-auth>
+  </body>
+</html>

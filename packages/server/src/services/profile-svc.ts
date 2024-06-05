@@ -5,7 +5,7 @@ import { Profile } from "../models/profile";
 
 const ProfileSchema = new Schema<Profile>(
     {
-    id: {type: String, required: true, trim: true},
+    userid: {type: String, required: true, trim: true},
     name: {type: String, required: true, trim: true},
     spotifyUsername: {type: String, required: true, trim: true},
     color: String
@@ -20,6 +20,7 @@ function index(): Promise<Profile[]> {
   }
   
   function get(userid: String): Promise<Profile> {
+    console.log(userid, "in profile-svc")
     return ProfileModel.find({ userid })
       .then((list) => list[0])
       .catch((err) => {
@@ -59,21 +60,21 @@ function index(): Promise<Profile[]> {
 // in-memory DB
 let profiles: Array<Profile> = [
   {
-    id: "JBills",
+    userid: "JBills",
     name: "Johnny Bills",
     spotifyUsername: "JohnnyBills",
     color: "#8A81BE"
   },
 
   {
-    id: "JSmalls",
+    userid: "JSmalls",
     name: "Jimmy Smalls",
     spotifyUsername: "Terminator",
     color: "#800000"
   },
 
   {
-    id: "KPlows",
+    userid: "KPlows",
     name: "Kenny Plows",
     spotifyUsername: "SnowPiercer",
     color: "#500000"

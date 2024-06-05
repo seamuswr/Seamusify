@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Music Player</title>
+    <link rel="stylesheet" href="public/styles/reset.css"/>
+    <link rel="stylesheet" href="public/styles/page.css"/>
+    <link rel="stylesheet" href="public/styles/tokens.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <script type="module" src="/src/main"></script>
+    <script type="module">
+        import { define, Auth } from "@calpoly/mustang";
+      
+        define({ "mu-auth": Auth.Provider });
+      </script>
+    <script type="module">
+        import { define, Auth, Events } from "@calpoly/mustang";
+        import { MusicalHeaderElement } from "/src/components/musical-header";
+    
+        define({ "mu-auth": Auth.Provider, "musical-header": MusicalHeaderElement });
+        window.relayEvent = Events.relay;
+    </script>
+    <script type="module">
+      function togglePartyMode(page, checked) {
+        page.classList.toggle("party-mode", checked);
+      }
+
+      document.body.addEventListener("party-mode", (event) =>
+        togglePartyMode(
+          event.currentTarget,
+          event.detail.checked
+        )
+      );
+    </script>
+</head>
+
+<body>
+    <mu-history provides="musical:history">
+        <mu-auth provides="musical:auth" redirect="./login.html">
+            <mu-store provides="musical:model">
+                <article class="page">
+                    <musical-header class="musical-header"></musical-header>
+                    <mu-switch>
+                    </mu-switch>
+                </article>
+            </mu-store>
+        </mu-auth>
+    </mu-history>
+</body>
+</html>

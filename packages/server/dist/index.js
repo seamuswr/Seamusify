@@ -26,6 +26,7 @@ var import_profiles = __toESM(require("./routes/profiles"));
 var import_mongo = require("./services/mongo");
 var import_auth = __toESM(require("./routes/auth"));
 var import_path = __toESM(require("path"));
+var import_promises = __toESM(require("node:fs/promises"));
 const app = (0, import_express.default)();
 const port = process.env.PORT || 3e3;
 const staticDir = process.env.STATIC || "public";
@@ -45,6 +46,12 @@ app.get("/hello", (req, res) => {
 });
 app.get("/goodbye", (req, res) => {
   res.send("<h1>Goodbye<h1>");
+});
+app.use("/app", (req, res) => {
+  const indexHtml = import_path.default.resolve(staticDir, "index.html");
+  import_promises.default.readFile(indexHtml, { encoding: "utf8" }).then(
+    (html) => res.send(html)
+  );
 });
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);

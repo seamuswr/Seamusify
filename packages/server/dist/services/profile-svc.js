@@ -24,7 +24,7 @@ module.exports = __toCommonJS(profile_svc_exports);
 var import_mongoose = require("mongoose");
 const ProfileSchema = new import_mongoose.Schema(
   {
-    id: { type: String, required: true, trim: true },
+    userid: { type: String, required: true, trim: true },
     name: { type: String, required: true, trim: true },
     spotifyUsername: { type: String, required: true, trim: true },
     color: String
@@ -36,6 +36,7 @@ function index() {
   return ProfileModel.find();
 }
 function get(userid) {
+  console.log(userid, "in profile-svc");
   return ProfileModel.find({ userid }).then((list) => list[0]).catch((err) => {
     throw `${userid} Not Found`;
   });
@@ -66,19 +67,19 @@ function update(userid, profile) {
 var profile_svc_default = { index, get, create, update };
 let profiles = [
   {
-    id: "JBills",
+    userid: "JBills",
     name: "Johnny Bills",
     spotifyUsername: "JohnnyBills",
     color: "#8A81BE"
   },
   {
-    id: "JSmalls",
+    userid: "JSmalls",
     name: "Jimmy Smalls",
     spotifyUsername: "Terminator",
     color: "#800000"
   },
   {
-    id: "KPlows",
+    userid: "KPlows",
     name: "Kenny Plows",
     spotifyUsername: "SnowPiercer",
     color: "#500000"

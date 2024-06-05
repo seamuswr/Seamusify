@@ -1,0 +1,25 @@
+:root {
+    --color-text-body: #b2b2ac;
+    --color-text-header: #a97b5b;
+    --color-background-header: #22075a;
+    --color-background-body: #12161b;
+    --color-background-button: #22075a;
+
+    --font-family-header: "Bitter", "IBM PLex Serif", serif;
+    --font-family-body: "Lato", "Open Sans", sans-serif;
+    --font-size-xlarge: 60px;
+    --font-size-large: 40px;
+    --font-size-medium: 25px;
+    --font-size-small: 18px;
+
+    --border-radius-header: 15px;
+
+}
+
+body.party-mode{
+    --color-text-body: pink;
+    --color-text-header: #5b371e;
+    --color-background-header: #ef9f00;
+    --color-background-body: #0956b4;
+    --color-background-button: #1e4d2a;
+}
